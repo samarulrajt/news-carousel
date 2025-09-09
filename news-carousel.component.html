@@ -1,0 +1,69 @@
+<div class="news-carousel card shadow-sm">
+  <div class="card-body">
+    <div class="d-flex justify-content-between align-items-start mb-3">
+      <div>
+        <h5 class="card-title mb-1">{{ heading }}</h5>
+        <p class="card-text text-muted small mb-0">{{ description }}</p>
+      </div>
+      <div class="small text-muted" *ngIf="items?.length">Total: {{ items.length }}</div>
+    </div>
+
+    <div class="carousel-wrap position-relative" (mouseenter)="onMouseEnter()" (mouseleave)="onMouseLeave()">
+      <div class="carousel-inner">
+        <ng-container *ngIf="items && items.length; else empty">
+          <div *ngFor="let it of items; let i = index"
+               class="carousel-item card mb-0"
+               [class.active]="i === currentIndex"
+               role="group"
+               [attr.aria-roledescription]="'slide ' + (i+1) + ' of ' + items.length">
+            <div class="row g-0">
+              <div class="col-md-4 d-none d-md-block">
+                <img [src]="it.image || placeholderImage" class="img-fluid rounded-start h-100 object-fit-cover" alt="{{ it.title }}">
+              </div>
+              <div class="col-md-8">
+                <div class="card-body">
+                  <div class="d-flex justify-content-between align-items-start mb-2">
+                    <h6 class="card-subtitle mb-1">{{ it.title }}</h6>
+                    <small class="text-muted">{{ it.date }}</small>
+                  </div>
+                  <p class="card-text mb-2 text-truncate-3">{{ it.summary }}</p>
+                  <div class="d-flex align-items-center justify-content-between">
+                    <div>
+                      <span class="badge bg-primary me-2" *ngIf="it.tag">{{ it.tag }}</span>
+                    </div>
+                    <div>
+                      <a class="btn btn-sm btn-outline-primary" [href]="it.link || '#'" target="_blank" rel="noopener">Read</a>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </ng-container>
+
+        <ng-template #empty>
+          <div class="text-center py-5 text-muted">No updates available.</div>
+        </ng-template>
+      </div>
+
+      <!-- controls -->
+      <button class="carousel-control-prev btn btn-sm btn-light shadow-sm"
+              aria-label="Previous" (click)="prev()">
+        ‹
+      </button>
+      <button class="carousel-control-next btn btn-sm btn-light shadow-sm"
+              aria-label="Next" (click)="next()">
+        ›
+      </button>
+
+      <!-- indicators -->
+      <div class="carousel-indicators mt-3 d-flex justify-content-center gap-2">
+        <button *ngFor="let _ of items; let idx=index"
+                (click)="goTo(idx)"
+                [class.active]="idx === currentIndex"
+                class="indicator-btn"
+                [attr.aria-label]="'Go to slide ' + (idx + 1)"></button>
+      </div>
+    </div>
+  </div>
+</div>
