@@ -1,0 +1,17 @@
+newsList: NewsItem[] = [
+  {
+    title: 'v2.3 Released',
+    summary: 'Important release with performance and accessibility improvements.',
+    date: '2025-08-30',
+    link: 'https://example.com/releases/v2.3',
+    image: 'assets/images/citi-logo.png',
+    tag: 'Release'
+  },
+  {
+    title: 'New Portfolio: FinTech Dashboard',
+    summary: 'Launched an enterprise dashboard for transaction analytics.',
+    date: '2025-08-18',
+    link: 'https://example.com/portfolio/fintech',
+    image: 'assets/images/citi-logo.png',
+    tag: 'Portfolio'
+  },
